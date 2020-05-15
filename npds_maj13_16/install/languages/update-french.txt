@@ -1,0 +1,3 @@
+<p class="lead">Nous allons maintenant proc&eacute;der aux modifications des tables de la base de donn&eacute;es et de certains fichiers.</p>
+<hr class="my-4" />
+<p class="lead text-danger">Il est recommand&eacute; de faire une sauvegarde de de votre base avant de poursuivre.</p>

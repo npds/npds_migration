@@ -1,0 +1,4 @@
+<p class="lead">Maintenant que vous venez de transf&eacute;rer l'ensemble des fichiers de NPDS vers votre serveur d'h&eacute;bergement Internet, ce script va vous permettre de mettre &agrave; jour votre site et d'obtenir en quelques minutes une configuration totalement op&eacute;rationnelle.</p>
+<hr class="my-4" />
+<p class="lead">Merci encore d'avoir choisi NPDS.</p>
+<p>Dev - developpeur@npds.org</p>

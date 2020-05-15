@@ -1,0 +1,3 @@
+<h3>Install ended</h3>
+<p align="center">Remember to empty <a href="admin.php?op=supercache" target="_blank" class="noir">SuperCache</a> and revalidate your <a href="admin.php?op=Configure" target="_blank" class="noir">preferences</a></p>
+<p align="center"><a href="static/changelog-rev13.txt" target="_blank" class="noir">View Changelog</a></p>

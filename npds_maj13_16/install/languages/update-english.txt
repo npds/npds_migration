@@ -1,0 +1,3 @@
+Now, we will proceed to update the database and some other files.
+<br /><br />
+Tips : save your database before continuing.
