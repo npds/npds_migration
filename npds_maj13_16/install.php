@@ -59,23 +59,40 @@ function mess_finish($lang) {
 
 // Fonctions operationnelles
 function maj_db() {
-   global $NPDS_Prefix;
-   // # mise à jour structure
-   // toutes tables : mise à jour du CHARSET par defaut des tables ce qui ne signifie pas la conversion des données existante...*/
+   global $NPDS_Prefix, $dbname;
+   // hardcoded liste original des tables d'une version 13 [64 tables]
    $table13 = array("access", "adminblock", "appli_log", "authors", "autonews", "banner", "bannerclient", "bannerfinish", "catagories", "chatbox", "compatsujet", "config", "counter", "downloads", "ephem", "faqanswer", "faqcategories", "forums", "forumtopics", "forum_attachments", "forum_read", "groupes", "headlines", "lblocks", "links_categories", "links_editorials", "links_links", "links_modrequest", "links_newlink", "links_subcategories", "lnl_body", "lnl_head_foot", "lnl_outside_users", "lnl_send", "mainblock", "metalang", "modules", "optimy", "poll_data", "poll_desc", "posts", "priv_msgs", "publisujet", "queue", "rblocks", "referer", "related", "reviews", "reviews_add", "reviews_main", "rubriques", "seccont", "seccont_tempo", "sections", "session", "sform", "stories", "stories_cat", "subscribe", "topics", "users", "users_extend", "users_status", "wspad");
-/*
+
+   // # mise à jour structure
+   // BASE : mise à jour du CHARSET et collation
+   $sql="ALTER DATABASE '".$dbname."' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;"
+   $result = sql_query($sql);
+
+   // TOUTES TABLES : mise à jour du CHARSET et collation par defaut des tables ce qui ne signifie pas la conversion des données existante !!...*/
    foreach($table13 as $v){
-      $sql="ALTER TABLE ".$NPDS_Prefix.$v." CHARACTER SET utf8"
+      $sql="ALTER TABLE ".$NPDS_Prefix.$v." CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"; //utf8mb4 pour la 16.2
       $result = sql_query($sql);
    }
-*/
+
+   // COLONNES de type char varchar text ...(274 résultats) : charset et collation
+   $sql="select * from information_schema.columns
+where table_schema = 'rev13' and DATA_TYPE REGEXP 'char|text'  
+order by table_name,ordinal_position";
+   $resultcol = sql_query($sql);
+   while($row = sql_fetch_row($resultcol)) {
+      $nomtable= $row[2];
+      $nomcol = $row[3];
+      $sql="ALTER TABLE '".$nomtable."' CHANGE '".$nomcol."' '".$nomcol."' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
+      sql_query($sql);
+   }
+
 
    // appli_log : modif des valeur par defaut compat mysql 5.7 
    $sql="ALTER TABLE ".$NPDS_Prefix."appli_log CHANGE al_date al_date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
 
    // authors : suppression des anciens droits ce qui signifie qu'il faudra réattribuer manuellement
-   $sql="ALTER TABLE ".$NPDS_Prefix."authors DROP COLUMN radminarticle, DROP COLUMN radmintopic, DROP COLUMN radminleft, DROP COLUMN radminright, DROP COLUMN radminuser, DROP COLUMN radminmain, DROP COLUMN radminsurvey, DROP COLUMN radminsection, DROP COLUMN radminlink, DROP COLUMN radminlink, DROP COLUMN radminephem, DROP COLUMN radminhead, DROP COLUMN radminfaq, DROP COLUMN radmindownload, DROP COLUMN radminforum, DROP COLUMN radminreviews, DROP COLUMN radminsdv, DROP COLUMN radminlnl";
+   $sql="ALTER TABLE ".$NPDS_Prefix."authors DROP COLUMN radminarticle, DROP COLUMN radmintopic, DROP COLUMN radminleft, DROP COLUMN radminright, DROP COLUMN radminuser, DROP COLUMN radminmain, DROP COLUMN radminsurvey, DROP COLUMN radminsection, DROP COLUMN radminlink, DROP COLUMN radminephem, DROP COLUMN radminhead, DROP COLUMN radminfaq, DROP COLUMN radmindownload, DROP COLUMN radminforum, DROP COLUMN radminreviews, DROP COLUMN radminsdv, DROP COLUMN radminlnl";
    $result = sql_query($sql);
 
    // counter
@@ -112,14 +129,20 @@ function maj_db() {
    $sql="ALTER TABLE ".$NPDS_Prefix."posts MODIFY poster_ip varchar(54)";
    $result = sql_query($sql);
 
-   // queue : modif valeur par defaut de timestamp compat mysql 5.7
+   // queue : modif valeur par defaut de 'timestamp' compat mysql 5.7
    $sql="ALTER TABLE ".$NPDS_Prefix."queue CHANGE timestamp timestamp DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
 
-// ?? //reviews : enlever defaut (non compatible mysql 5.7)
-   
-// ?? //reviews_main : enlever defaut
+   // reviews : modif valeur par defaut de 'date' compat mysql 5.7
+   $sql="ALTER TABLE ".$NPDS_Prefix."reviews CHANGE date date DATE NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   // reviews : modif valeur par defaut de 'title' the null default value for text columns is empty string '' et pas NULL
+   $sql="ALTER TABLE ".$NPDS_Prefix."reviews_main CHANGE title title text DEFAULT ''";
+   $result = sql_query($sql);
 
+   // seccont: suppression de colonne inutile
+   $sql="ALTER TABLE ".$NPDS_Prefix."seccont DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
+   $result = sql_query($sql);
    // seccont_tempo: suppression de colonne inutile
    $sql="ALTER TABLE ".$NPDS_Prefix."seccont_tempo DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
    $result = sql_query($sql);
@@ -140,7 +163,7 @@ function maj_db() {
    $sql="CREATE TABLE ".$NPDS_Prefix."droits (
   d_aut_aid varchar(40) NOT NULL COMMENT 'id administrateur',
   d_fon_fid tinyint(3) unsigned NOT NULL COMMENT 'id fonction',
-  d_droits varchar(5) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Dune_proto'";
+  d_droits varchar(5) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
    $result = sql_query($sql);
 
    $sql="CREATE TABLE ".$NPDS_Prefix."fonctions (
@@ -159,7 +182,7 @@ function maj_db() {
   fcategorie_nom varchar(200) NOT NULL,
   fordre tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (fid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Dune_proto'";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
    $result = sql_query($sql);
 
    $sql="CREATE TABLE ".$NPDS_Prefix."ip_loc (
@@ -173,7 +196,7 @@ function maj_db() {
   ip_code_country varchar(4) NOT NULL,
   ip_city varchar(150) NOT NULL DEFAULT '0',
   PRIMARY KEY (ip_id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
    $result = sql_query($sql);
 
 // fonctions : remplissage table (!! à voir le comportement de l'auto-increment !!)
@@ -272,7 +295,7 @@ function maj_files() {
    
    @unlink("images/admin/ws/package_locked.gif");
    
-   // Update NPDS Version
+   // Update NPDS Version// ==> à revoir
    $file=file("config.php");
    $fic = fopen("config.php", "w");
       while(list($n,$ligne) = each($file)) {
@@ -318,7 +341,7 @@ function maj_files() {
    if ($language=="french") $lang="french"; else $lang="english"; 
 
    // Check NPDS version
-   if ($Version_Sub != "REvolution18") {
+   if ($Version_Sub != "REvolution13") {
       echo '
       <div id="welcome" class="alert alert-danger lead my-4 mx-2">
          <p class="mt-3 text-danger">
