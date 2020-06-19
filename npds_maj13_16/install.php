@@ -51,7 +51,7 @@ function mess_update($lang) {
 }
 
 function mess_finish($lang) {
-   echo "<div id=\"maj_deb\" class=\"mess\">";
+   echo '<div id="maj_fin" class="jumbotron my-4 mx-2">';
     $id_fr = fopen("install/languages/finish-$lang.txt", "r");
     fpassthru($id_fr);
    echo "</div><br />";
@@ -65,87 +65,365 @@ function maj_db() {
 
    // # mise à jour structure
    // BASE : mise à jour du CHARSET et collation
-   $sql="ALTER DATABASE '".$dbname."' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;"
+   $sql="ALTER DATABASE '".$dbname."' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;";
    $result = sql_query($sql);
+   echo '
+   <div class="mx-2 my-3">
+      <h4>
+            <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#labase"><i class="toggle-icon fa fa-caret-down"></i></a>BASE : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">1</span>
+      </h4>
+      <div id="labase" class="collapse"><small class="text-success"><strong>'.$dbname.'</strong> : mise à jour du CHARSET et collation<i class="fa fa-check text-success ml-2"></i></small></div>
+   </div>';
 
-   // TOUTES TABLES : mise à jour du CHARSET et collation par defaut des tables ce qui ne signifie pas la conversion des données existante !!...*/
+   // TOUTES TABLES : mise à jour du CHARSET utf8mb4 et collation utf8mb4_unicode_ci par defaut des tables ce qui ne signifie pas la conversion des données existante !!... must be 64 résultats*/
+   $aff=''; $nbr=0;
    foreach($table13 as $v){
       $sql="ALTER TABLE ".$NPDS_Prefix.$v." CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"; //utf8mb4 pour la 16.2
       $result = sql_query($sql);
+      $aff.= '<small class="text-success"><strong>'.$NPDS_Prefix.$v.'</strong> : mise à jour du CHARSET utf8mb4 et collation utf8mb4_unicode_ci</small><i class="fa fa-check text-success ml-2" title="ALTER TABLE '.$NPDS_Prefix.$v.' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" data-toggle="tooltip"></i><br />';
+      $nbr++;
    }
+      echo '
+      <div class="mx-2 mb-3">
+         <h4>
+            <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#lestables"><i class="toggle-icon fa fa-caret-down"></i></a>TABLES : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
+         </h4>
+         <div id="lestables" class="collapse">'.$aff.'</div>
+      </div>';
 
-   // COLONNES de type char varchar text ...(274 résultats) : charset et collation
-   $sql="select * from information_schema.columns
-where table_schema = 'rev13' and DATA_TYPE REGEXP 'char|text'  
-order by table_name,ordinal_position";
+//==> COLONNES de type char varchar text ...(249 résultats) : charset et collation
+   $aff='';$nbr=0;
+   $sql="SELECT * FROM information_schema.columns
+WHERE table_schema = '".$dbname."' AND data_type REGEXP 'char|text' 
+ORDER BY table_name,ordinal_position";
    $resultcol = sql_query($sql);
    while($row = sql_fetch_row($resultcol)) {
       $nomtable= $row[2];
       $nomcol = $row[3];
       $sql="ALTER TABLE '".$nomtable."' CHANGE '".$nomcol."' '".$nomcol."' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
       sql_query($sql);
+      $aff.= '<small class="text-success"><strong>'.$nomtable.' : '.$nomcol.'</strong> : mise à jour du CHARSET utf8mb4 et collation utf8mb4_unicode_ci</small><i class="fa fa-check text-success ml-2"></i><br />';
+      $nbr++;
    }
+   echo '
+   <div class="mx-2 mb-3">
+      <h4>
+         <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#lescolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
+      </h4>
+      <div id="lescolonnes" class="collapse">'.$aff.'</div>
+   </div>';
+//<==
 
-
-   // appli_log : modif des valeur par defaut compat mysql 5.7 
-   $sql="ALTER TABLE ".$NPDS_Prefix."appli_log CHANGE al_date al_date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
-
+//==> COLONNES suppressions
+   $aff='';$nbr=0;
    // authors : suppression des anciens droits ce qui signifie qu'il faudra réattribuer manuellement
+   $colauthorssup=array('radminarticle','radmintopic','radminleft','radminright','radminuser','radminmain','radminsurvey','radminsection','radminlink','radminephem','radminhead','radminfaq','radmindownload','radminforum','radminreviews','radminsdv','radminlnl');
    $sql="ALTER TABLE ".$NPDS_Prefix."authors DROP COLUMN radminarticle, DROP COLUMN radmintopic, DROP COLUMN radminleft, DROP COLUMN radminright, DROP COLUMN radminuser, DROP COLUMN radminmain, DROP COLUMN radminsurvey, DROP COLUMN radminsection, DROP COLUMN radminlink, DROP COLUMN radminephem, DROP COLUMN radminhead, DROP COLUMN radminfaq, DROP COLUMN radmindownload, DROP COLUMN radminforum, DROP COLUMN radminreviews, DROP COLUMN radminsdv, DROP COLUMN radminlnl";
    $result = sql_query($sql);
-
-   // counter
-
-   // downloads : modif des valeur par defaut compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."downloads CHANGE ddate ddate DATE NOT NULL DEFAULT '1000-01-01'";
+   foreach($colauthorssup as $v) {
+      $aff.= '<small class="text-success"><strong>authors : '.$v.'</strong> : supprimer</small><i class="fa fa-check text-success ml-2"></i><br />';
+   }
+   // seccont: suppression de colonnes inutiles
+   $colseccontssup=array('crit1','crit2','crit3','crit4','crit5','crit6','crit7','crit8','crit9','crit10','crit11','crit12','crit13','crit14','crit15','crit16','crit17','crit18','crit19','crit20');
+   $sql="ALTER TABLE ".$NPDS_Prefix."seccont DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
    $result = sql_query($sql);
-   // downloads : dfilesize no need signed value ...
-   $sql="ALTER TABLE ".$NPDS_Prefix."downloads CHANGE dfilesize dfilesize BIGINT(15) UNSIGNED NULL DEFAULT NULL";
-   // downloads : change type of value ...gestion des permissions pour les groupes ...
-   $sql="ALTER TABLE ".$NPDS_Prefix."downloads MODIFY perms varchar(480)";
+   foreach($colseccontssup as $v) {
+      $aff.= '<small class="text-success"><strong>seccont : '.$v.'</strong> : supprimer</small><i class="fa fa-check text-success ml-2"></i><br />';
+   }
+   // seccont_tempo: suppression de colonnes inutiles
+   $sql="ALTER TABLE ".$NPDS_Prefix."seccont_tempo DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
+   $result = sql_query($sql);
+   foreach($colseccontssup as $v) {
+      $aff.= '<small class="text-success"><strong>seccont_tempo : '.$v.'</strong> : supprimer</small><i class="fa fa-check text-success ml-2"></i><br />';
+   }
+   // users : suppression des "anciens réseaux sociaux"
+   $coluserssup=array('user_icq','user_aim','user_yim','user_msnm');
+   $sql="ALTER TABLE ".$NPDS_Prefix."users DROP COLUMN user_icq, DROP COLUMN user_aim, DROP COLUMN user_yim, DROP COLUMN user_msnm";
+   $result = sql_query($sql);
+   foreach($coluserssup as $v) {
+      $aff.= '<small class="text-success"><strong>users : '.$v.'</strong> : supprimer</small><i class="fa fa-check text-success ml-2"></i><br />';
+   }
+   echo '
+   <div class="mx-2 mb-3">
+      <h4>
+         <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#supcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : suppression <span class="badge badge-pill badge-danger float-right ml-2">XXX</span>
+      </h4>
+      <div id="supcolonnes" class="collapse">'.$aff.'</div>
+   </div>';
+//<==
+
+//==> COLONNES modifications
+   $aff='';$nbr=0;
+// access : modif taille 
+   $t='access'; $c='access_title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(80)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(80))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// adminblock : modif taille 
+   $t='adminblock'; $c='title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(1000))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+// appli_log : modif taille IPV6 support
+   $t='appli_log'; $c='al_ip';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(54) IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// appli_log : modif valeur par défaut compat mysql 5.7
+   $c='al_date';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>appli_log : al_date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+// authors : modif taille //à voir pour aid et name
+   $t='authors'; $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// authors : modif taille
+   $c='email'; 
+   $sql="ALTER TABLE ".$NPDS_Prefix." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// banner : modif taille
+   $t='banner'; $c='imageurl';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// banner : modif taille
+   $c='clickurl';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// bannerclient : modif taille
+   $t='bannerclient'; $c='email';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// chatbox : modif taille IPV6 support
+   $t='chatbox'; $c='ip';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+// downloads : ddate modif valeur par defaut compat mysql 5.7
+   $t='downloads'; $c='ddate';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATE NOT NULL DEFAULT '1000-01-01'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// downloads : dfilesize no need signed value ...
+   $c='dfilesize';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." BIGINT(15) UNSIGNED NULL DEFAULT NULL";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer attribut (signed non nécessaire)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// downloads : change type of value ...gestion des permissions pour les groupes ...
+   $c='perms';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(480)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer type (varchar(480))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// downloads : modif taille
+   $c='durl';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+// headlines : modif taille
+   $t='headlines'; $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// headlines : modif taille
+   $c='headlinesurl';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// lblocks : modif taille
+   $t='lblocks'; $c='title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// links_editorials : modif valeur par defaut de editorialtimestamp compat mysql 5.7
+   $sql="ALTER TABLE ".$NPDS_Prefix."links_editorials CHANGE editorialtimestamp editorialtimestamp DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>links_editorials : editorialtimestamp</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// lnl_outside_users : modif valeur par defaut de date compat mysql 5.7
+   $sql="ALTER TABLE ".$NPDS_Prefix."lnl_outside_users CHANGE date date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>lnl_outside_users : date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// lnl_send : modif valeur par defaut de date compat mysql 5.7
+   $sql="ALTER TABLE ".$NPDS_Prefix."lnl_send CHANGE date date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>lnl_send : date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+   // mainblock : modif taille
+   $t='mainblock'; $c='title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// queue : modif valeur par defaut de 'timestamp' compat mysql 5.7
+   $t='queue'; $c='timestamp';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+   // rblocks : modif taille
+   $t='rblocks'; $c='title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+   // referer : modif taille
+   $t='referer'; $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+   // related : modif taille
+   $t='related'; $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// reviews : modif valeur par defaut de 'date' compat mysql 5.7
+   $t='reviews'; $c='date';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATE NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// reviews : modif taille
+   $c='email';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// reviews_add : modif taille
+   $t='reviews_add'; $c='email';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// reviews_add : modif taille
+   $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// reviews_main : modif valeur par defaut de 'title' the null default value for text columns is empty string '' et pas NULL
+   $t='reviews_main'; $c='title';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." text DEFAULT ''";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer valeur par défaut (the null default value for text columns is empty string \'\')</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// session : modif taille username support IPV6 (à voir si il faut rajouter NOT NULL)
+   $t='session'; $c='username';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("54") IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// session : modif taille host_addr support IPV6 (à voir si il faut rajouter NOT NULL)
+   $c='host_addr';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("54") IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+
+// users : modif taille
+   $t='users'; $c='email';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// users : modif taille
+   $c='femail';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// users : modif taille
+   $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// users : type de user_theme (pour skin implémentation)
+   $c='user_theme';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(255)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>reviews : title</strong> : modifer type (varchar("255"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+
+
+   echo '
+   <div class="mx-2 mb-3">
+      <h4>
+         <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#modcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : modifications <span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
+      </h4>
+      <div id="modcolonnes" class="collapse">'.$aff.'</div>
+   </div>';
+
+/*
+
+
+
+   // counter à faire
+
 
    // links_categories : modif longueur title
    $sql="ALTER TABLE ".$NPDS_Prefix."links_categories MODIFY title varchar(255)";
    $result = sql_query($sql);
 
-   // links_editorials : modif valeur par defaut de editorialtimestamp compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."links_editorials CHANGE editorialtimestamp editorialtimestamp DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
 
    // links_links : modif longueur url
    $sql="ALTER TABLE ".$NPDS_Prefix."links_links MODIFY url varchar(255)";
    $result = sql_query($sql);
 
-   // lnl_outside_users : modif valeur par defaut de date compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."lnl_outside_users CHANGE date date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
 
-   // lnl_send : modif valeur par defaut de date compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."lnl_send CHANGE date date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
 
    // posts : modif longueur poster_ip pour support IPV6
    $sql="ALTER TABLE ".$NPDS_Prefix."posts MODIFY poster_ip varchar(54)";
    $result = sql_query($sql);
 
-   // queue : modif valeur par defaut de 'timestamp' compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."queue CHANGE timestamp timestamp DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
 
-   // reviews : modif valeur par defaut de 'date' compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."reviews CHANGE date date DATE NOT NULL DEFAULT '1000-01-01 00:00:00'";
-   $result = sql_query($sql);
-   // reviews : modif valeur par defaut de 'title' the null default value for text columns is empty string '' et pas NULL
-   $sql="ALTER TABLE ".$NPDS_Prefix."reviews_main CHANGE title title text DEFAULT ''";
-   $result = sql_query($sql);
 
-   // seccont: suppression de colonne inutile
-   $sql="ALTER TABLE ".$NPDS_Prefix."seccont DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
-   $result = sql_query($sql);
-   // seccont_tempo: suppression de colonne inutile
-   $sql="ALTER TABLE ".$NPDS_Prefix."seccont_tempo DROP COLUMN crit1, DROP COLUMN crit2, DROP COLUMN crit3, DROP COLUMN crit4, DROP COLUMN crit5, DROP COLUMN crit6, DROP COLUMN crit7, DROP COLUMN crit8, DROP COLUMN crit9, DROP COLUMN crit10, DROP COLUMN crit11, DROP COLUMN crit12, DROP COLUMN crit13, DROP COLUMN crit14, DROP COLUMN crit15, DROP COLUMN crit16, DROP COLUMN crit17, DROP COLUMN crit18, DROP COLUMN crit19, DROP COLUMN crit20";
-   $result = sql_query($sql);
 
    // session : modif longueur username, host_addr pour support IPV6 (à voir si il faut rajouter NOT NULL)
    $sql="ALTER TABLE ".$NPDS_Prefix."session MODIFY username varchar(54)";
@@ -153,33 +431,28 @@ order by table_name,ordinal_position";
    $sql="ALTER TABLE ".$NPDS_Prefix."session MODIFY host_addr varchar(54)";
    $result = sql_query($sql);
 
-   // users : suppression des "anciens réseaux sociaux" et type de user_theme (pour skin implémentation)
-   $sql="ALTER TABLE ".$NPDS_Prefix."users DROP COLUMN user_icq, DROP COLUMN user_aim, DROP COLUMN user_yim, DROP COLUMN user_msnm";
-   $result = sql_query($sql);
-   $sql="ALTER TABLE ".$NPDS_Prefix."users MODIFY user_theme varchar(255)";
-   $result = sql_query($sql);
 
    // création : 3 tables droits, fonctions, IP_loc
    $sql="CREATE TABLE ".$NPDS_Prefix."droits (
-  d_aut_aid varchar(40) NOT NULL COMMENT 'id administrateur',
+  d_aut_aid varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id administrateur',
   d_fon_fid tinyint(3) unsigned NOT NULL COMMENT 'id fonction',
-  d_droits varchar(5) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
+  d_droits varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
    $result = sql_query($sql);
 
    $sql="CREATE TABLE ".$NPDS_Prefix."fonctions (
   fid mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id unique auto incrémenté',
-  fnom varchar(40) NOT NULL,
+  fnom varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   fdroits1 tinyint(3) unsigned NOT NULL,
-  fdroits1_descr varchar(40) NOT NULL,
+  fdroits1_descr varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   finterface tinyint(1) unsigned NOT NULL COMMENT '1 ou 0 : la fonction dispose ou non d''une interface',
   fetat tinyint(1) NOT NULL COMMENT '0 ou 1  9 : non active ou installé, installé',
-  fretour varchar(500) NOT NULL COMMENT 'utiliser par les fonctions de categorie Alerte : nombre, ou ',
-  fretour_h varchar(500) NOT NULL,
-  fnom_affich varchar(200) NOT NULL,
-  ficone varchar(40) NOT NULL,
-  furlscript varchar(4000) NOT NULL COMMENT 'attribut et contenu  de balise A : href=\"xxx\", onclick=\"xxx\"  etc',
+  fretour varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'utiliser par les fonctions de categorie Alerte : nombre, ou ',
+  fretour_h varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  fnom_affich varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  ficone varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  furlscript varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'attribut et contenu  de balise A : href=\"xxx\", onclick=\"xxx\"  etc',
   fcategorie tinyint(3) unsigned NOT NULL,
-  fcategorie_nom varchar(200) NOT NULL,
+  fcategorie_nom varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   fordre tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (fid)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
@@ -189,12 +462,12 @@ order by table_name,ordinal_position";
   ip_id smallint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   ip_long float NOT NULL DEFAULT '0',
   ip_lat float NOT NULL DEFAULT '0',
-  ip_visi_pag varchar(100) NOT NULL DEFAULT '',
+  ip_visi_pag varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   ip_visite mediumint(9) UNSIGNED NOT NULL DEFAULT '0',
-  ip_ip varchar(54) NOT NULL DEFAULT '',
-  ip_country varchar(100) NOT NULL DEFAULT '0',
-  ip_code_country varchar(4) NOT NULL,
-  ip_city varchar(150) NOT NULL DEFAULT '0',
+  ip_ip varchar(54) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  ip_country varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  ip_code_country varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  ip_city varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (ip_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
    $result = sql_query($sql);
@@ -251,6 +524,8 @@ INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, f
 INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(75, 'geoloc', 75, '', 1, 1, '', '', 'geoloc', 'geoloc', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=geoloc&ModStart=admin/geoloc_set\"', 6, 'Modules', 0);";
 $result = sql_query($sql);
 
+
+//==> to do (on chechr et effeace les metamots du core on touche pas au autres)
    // Mise à jour de la table metalang
    $sql="UPDATE ".$NPDS_Prefix."metalang SET description='[french]Fabrique un bloc R (droite) ou L (gauche) en s\'appuyant sur l\'ID (voir gestionnaire de blocs) pour incorporation / syntaxe : blocID(R1) ou blocID(L2)[/french]' WHERE def='blocID'";
    $result = sql_query($sql);
@@ -267,29 +542,14 @@ $result = sql_query($sql);
          sql_query("UPDATE ".$NPDS_Prefix."users set user_avatar='".substr($temp['user_avatar'],1)."' where uid='".$temp['uid']."'");
       }
    }
-
-   // Rajout d'options pour WS
-   $sql="ALTER TABLE ".$NPDS_Prefix."groupes ADD groupe_blocnote INT(1) UNSIGNED NOT NULL DEFAULT '0'";
-   $result = sql_query($sql);
-   $sql="ALTER TABLE ".$NPDS_Prefix."groupes ADD groupe_pad INT(1) UNSIGNED NOT NULL DEFAULT '0'";
-   $result = sql_query($sql);
-   
-   // Converti en nouveau WS
-   $result = sql_query("SELECT id, content from ".$NPDS_Prefix."lblocks where content like '%espace_groupe(%'");
-   while($temp = sql_fetch_assoc($result) ) {
-      $ibid=str_replace("espace_groupe(","",$temp['content']);
-      $ibid=trim(str_replace(",1) ","",$ibid));
-      sql_query("UPDATE ".$NPDS_Prefix."lblocks set content='function#bloc_espace_groupe\r\nparams#$ibid,1' where id='".$temp['id']."'");
-      sql_query("UPDATE ".$NPDS_Prefix."groupes set groupe_blocnote='1', groupe_pad='1' where groupe_id='$ibid'");
-   }
-   $result = sql_query("SELECT id, content from ".$NPDS_Prefix."rblocks where content like '%espace_groupe(%'");
-   while($temp = sql_fetch_assoc($result) ) {
-      $ibid=str_replace("espace_groupe(","",$temp['content']);
-      $ibid=str_replace(",1) ","",$ibid);
-      sql_query("UPDATE ".$NPDS_Prefix."rblocks set content='function#bloc_espace_groupe\r\nparams#$ibid,1' where id='".$temp['id']."'");
-      sql_query("UPDATE ".$NPDS_Prefix."groupes set groupe_blocnote='1', groupe_pad='1' where groupe_id='$ibid'");
-   }
+*/
+echo '
+<script type="text/javascript" src="lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>';
 }
+
+
+
 function maj_files() {   
    global $nuke_url;
    
@@ -326,7 +586,7 @@ function maj_files() {
    echo '
    
    <link id="bsth" rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
-   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />';
+   <link rel="stylesheet" href="lib/font-awesome/css/all.min.css" />';
    echo '
    <div class="container-fluid">
       <div class="row bg-secondary py-2">
@@ -340,7 +600,8 @@ function maj_files() {
 
    if ($language=="french") $lang="french"; else $lang="english"; 
 
-   // Check NPDS version
+   // Check NPDS version et le fichier config !!!!
+/*
    if ($Version_Sub != "REvolution13") {
       echo '
       <div id="welcome" class="alert alert-danger lead my-4 mx-2">
@@ -356,6 +617,7 @@ function maj_files() {
    </div>';
       $op="bad_version";
    }
+*/
 
    switch ($op) {
       case "update":
@@ -363,7 +625,7 @@ function maj_files() {
          break;
          
       case "finish":
-//         maj_db();
+         maj_db();
 //         maj_files();
          mess_finish($lang);
 

@@ -1,6 +1,6 @@
 <h3>Installation termin&eacute;e</h3>
 <hr class="my-4" />
 
-<p align="center">Pensez &agrave; vider <a href="admin.php?op=supercache" target="_blank" class="noir">SuperCache</a> et &agrave; revalider vos <a href="admin.php?op=Configure" target="_blank" class="noir">pr&eacute;f&eacute;rences</a></p>
-<p align="center"><a href="static/changelog-rev13.txt" target="_blank" class="noir">Visualiser le Changelog</a></p>
+<p align="center">Pensez &agrave; vider <a href="admin.php?op=supercache" target="_blank" >SuperCache</a> et &agrave; revalider vos <a href="admin.php?op=Configure" target="_blank">pr&eacute;f&eacute;rences</a></p>
+<p align="center"><a href="static/changelog-rev16.txt" target="_blank">Visualiser le Changelog</a></p>
  
