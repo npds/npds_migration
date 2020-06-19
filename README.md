@@ -8,5 +8,5 @@ Objectif faciliter la mise à jour des anciennes base de données Revolution 13
 
 - support full utf8 du portail
 - support IPV6
-- support admin/droit nouvelle version
+- support admin/droit v16.x
 - support évolution mysql
