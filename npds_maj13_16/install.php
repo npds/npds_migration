@@ -64,7 +64,7 @@ function maj_db() {
    $table13 = array("access", "adminblock", "appli_log", "authors", "autonews", "banner", "bannerclient", "bannerfinish", "catagories", "chatbox", "compatsujet", "config", "counter", "downloads", "ephem", "faqanswer", "faqcategories", "forums", "forumtopics", "forum_attachments", "forum_read", "groupes", "headlines", "lblocks", "links_categories", "links_editorials", "links_links", "links_modrequest", "links_newlink", "links_subcategories", "lnl_body", "lnl_head_foot", "lnl_outside_users", "lnl_send", "mainblock", "metalang", "modules", "optimy", "poll_data", "poll_desc", "posts", "priv_msgs", "publisujet", "queue", "rblocks", "referer", "related", "reviews", "reviews_add", "reviews_main", "rubriques", "seccont", "seccont_tempo", "sections", "session", "sform", "stories", "stories_cat", "subscribe", "topics", "users", "users_extend", "users_status", "wspad");
 
    // # mise à jour structure
-   // BASE : mise à jour du CHARSET et collation
+//==> BASE : mise à jour du CHARSET et collation
    $sql="ALTER DATABASE '".$dbname."' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;";
    $result = sql_query($sql);
    echo '
@@ -72,10 +72,11 @@ function maj_db() {
       <h4>
             <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#labase"><i class="toggle-icon fa fa-caret-down"></i></a>BASE : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">1</span>
       </h4>
-      <div id="labase" class="collapse"><small class="text-success"><strong>'.$dbname.'</strong> : mise à jour du CHARSET et collation<i class="fa fa-check text-success ml-2"></i></small></div>
+      <div id="labase" class="ml-4 collapse"><small class="text-success"><strong>'.$dbname.'</strong> : mise à jour du CHARSET et collation<i class="fa fa-check text-success ml-2"></i></small></div>
    </div>';
+//<==
 
-   // TOUTES TABLES : mise à jour du CHARSET utf8mb4 et collation utf8mb4_unicode_ci par defaut des tables ce qui ne signifie pas la conversion des données existante !!... must be 64 résultats*/
+//==> TOUTES TABLES (13) : mise à jour du CHARSET utf8mb4 et collation utf8mb4_unicode_ci par defaut des tables ce qui ne signifie pas la conversion des données existante !!... must be 64 résultats
    $aff=''; $nbr=0;
    foreach($table13 as $v){
       $sql="ALTER TABLE ".$NPDS_Prefix.$v." CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"; //utf8mb4 pour la 16.2
@@ -88,8 +89,70 @@ function maj_db() {
          <h4>
             <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#lestables"><i class="toggle-icon fa fa-caret-down"></i></a>TABLES : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
          </h4>
-         <div id="lestables" class="collapse">'.$aff.'</div>
+         <div id="lestables" class="ml-4 collapse">'.$aff.'</div>
       </div>';
+//<==
+
+//==>TABLES : création
+   $aff=''; $nbr=0;
+// droits : création 
+   $t='droits';
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix.$t." (
+  d_aut_aid varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id administrateur',
+  d_fon_fid tinyint(3) unsigned NOT NULL COMMENT 'id fonction',
+  d_droits varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.'</strong> : création</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// fonctions : création 
+   $t='fonctions';
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix.$t." (
+  fid mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id unique auto incrémenté',
+  fnom varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  fdroits1 tinyint(3) unsigned NOT NULL,
+  fdroits1_descr varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  finterface tinyint(1) unsigned NOT NULL COMMENT '1 ou 0 : la fonction dispose ou non d''une interface',
+  fetat tinyint(1) NOT NULL COMMENT '0 ou 1  9 : non active ou installé, installé',
+  fretour varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'utiliser par les fonctions de categorie Alerte : nombre, ou ',
+  fretour_h varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  fnom_affich varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  ficone varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  furlscript varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'attribut et contenu  de balise A : href=\"xxx\", onclick=\"xxx\"  etc',
+  fcategorie tinyint(3) unsigned NOT NULL,
+  fcategorie_nom varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  fordre tinyint(2) unsigned NOT NULL,
+  PRIMARY KEY (fid)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.'</strong> : création</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+
+// ip_loc : création 
+   $t='ip_loc';
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix.$t." (
+  ip_id smallint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  ip_long float NOT NULL DEFAULT '0',
+  ip_lat float NOT NULL DEFAULT '0',
+  ip_visi_pag varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  ip_visite mediumint(9) UNSIGNED NOT NULL DEFAULT '0',
+  ip_ip varchar(54) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  ip_country varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  ip_code_country varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  ip_city varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  PRIMARY KEY (ip_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.'</strong> : création</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   echo '
+      <div class="mx-2 mb-3">
+         <h4>
+            <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#creatables"><i class="toggle-icon fa fa-caret-down"></i></a>TABLES : création<span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
+         </h4>
+         <div id="creatables" class="ml-4 collapse">'.$aff.'</div>
+      </div>';
+//<==
 
 //==> COLONNES de type char varchar text ...(249 résultats) : charset et collation
    $aff='';$nbr=0;
@@ -110,7 +173,7 @@ ORDER BY table_name,ordinal_position";
       <h4>
          <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#lescolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : mise à jour du CHARSET et collation<span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
       </h4>
-      <div id="lescolonnes" class="collapse">'.$aff.'</div>
+      <div id="lescolonnes" class="ml-4 collapse">'.$aff.'</div>
    </div>';
 //<==
 
@@ -148,7 +211,7 @@ ORDER BY table_name,ordinal_position";
       <h4>
          <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#supcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : suppression <span class="badge badge-pill badge-danger float-right ml-2">XXX</span>
       </h4>
-      <div id="supcolonnes" class="collapse">'.$aff.'</div>
+      <div id="supcolonnes" class="ml-4 collapse">'.$aff.'</div>
    </div>';
 //<==
 
@@ -397,7 +460,7 @@ ORDER BY table_name,ordinal_position";
       <h4>
          <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#modcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : modifications <span class="badge badge-pill badge-success float-right ml-2">'.$nbr.'</span>
       </h4>
-      <div id="modcolonnes" class="collapse">'.$aff.'</div>
+      <div id="modcolonnes" class="ml-4 collapse">'.$aff.'</div>
    </div>';
 
 /*
@@ -432,14 +495,14 @@ ORDER BY table_name,ordinal_position";
    $result = sql_query($sql);
 
 
-   // création : 3 tables droits, fonctions, IP_loc
-   $sql="CREATE TABLE ".$NPDS_Prefix."droits (
+   // création : 3 tables droits, fonctions, ip_loc
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."droits (
   d_aut_aid varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id administrateur',
   d_fon_fid tinyint(3) unsigned NOT NULL COMMENT 'id fonction',
   d_droits varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
    $result = sql_query($sql);
 
-   $sql="CREATE TABLE ".$NPDS_Prefix."fonctions (
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."fonctions (
   fid mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id unique auto incrémenté',
   fnom varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   fdroits1 tinyint(3) unsigned NOT NULL,
@@ -458,7 +521,7 @@ ORDER BY table_name,ordinal_position";
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
    $result = sql_query($sql);
 
-   $sql="CREATE TABLE ".$NPDS_Prefix."ip_loc (
+   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."ip_loc (
   ip_id smallint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   ip_long float NOT NULL DEFAULT '0',
   ip_lat float NOT NULL DEFAULT '0',
