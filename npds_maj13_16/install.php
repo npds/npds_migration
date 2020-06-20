@@ -221,7 +221,7 @@ ORDER BY table_name,ordinal_position";
    $t='access'; $c='access_title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(80)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(80))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(80))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // adminblock : modif taille 
    $t='adminblock'; $c='title';
@@ -234,7 +234,7 @@ ORDER BY table_name,ordinal_position";
    $t='appli_log'; $c='al_ip';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(54) IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(54) IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // appli_log : modif valeur par défaut compat mysql 5.7
    $c='al_date';
@@ -247,7 +247,7 @@ ORDER BY table_name,ordinal_position";
    $t='authors'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // authors : modif taille
    $c='email'; 
@@ -260,7 +260,7 @@ ORDER BY table_name,ordinal_position";
    $t='banner'; $c='imageurl';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // banner : modif taille
    $c='clickurl';
@@ -273,21 +273,21 @@ ORDER BY table_name,ordinal_position";
    $t='bannerclient'; $c='email';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // chatbox : modif taille IPV6 support
    $t='chatbox'; $c='ip';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
 // downloads : ddate modif valeur par defaut compat mysql 5.7
    $t='downloads'; $c='ddate';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATE NOT NULL DEFAULT '1000-01-01'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // downloads : dfilesize no need signed value ...
    $c='dfilesize';
@@ -312,7 +312,7 @@ ORDER BY table_name,ordinal_position";
    $t='headlines'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // headlines : modif taille
    $c='headlinesurl';
@@ -325,34 +325,35 @@ ORDER BY table_name,ordinal_position";
    $t='lblocks'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // links_editorials : modif valeur par defaut de editorialtimestamp compat mysql 5.7
-   $sql="ALTER TABLE ".$NPDS_Prefix."links_editorials CHANGE editorialtimestamp editorialtimestamp DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $t='links_editorials'; $c='editorialtimestamp';
+   $sql="ALTER TABLE ".$NPDS_Prefix." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>links_editorials : editorialtimestamp</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // links_links : modif taille
    $t='links_links'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // links_modrequest : modif taille
    $t='links_modrequest'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // links_newlink : modif taille
    $t='links_newlink'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // links_newlink : modif taille
    $c='email';
@@ -365,7 +366,7 @@ ORDER BY table_name,ordinal_position";
    $t='lnl_outside_users'; $c='date';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // lnl_outside_users : modif taille
    $c='email';
@@ -377,14 +378,14 @@ ORDER BY table_name,ordinal_position";
 // lnl_send : modif valeur par defaut de date compat mysql 5.7
    $sql="ALTER TABLE ".$NPDS_Prefix."lnl_send CHANGE date date DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>lnl_send : date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>lnl_send : date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
    // mainblock : modif taille
    $t='mainblock'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // queue : modif valeur par defaut de 'timestamp' compat mysql 5.7
@@ -426,6 +427,12 @@ ORDER BY table_name,ordinal_position";
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
    $result = sql_query($sql);
    $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+// reviews : modif taille
+   $c='url';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
+   $result = sql_query($sql);
+   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // reviews_add : modif taille
