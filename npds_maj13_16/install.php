@@ -11,12 +11,13 @@
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 3 of the License.       */
 /************************************************************************/
-if (!function_exists("Mysql_Connexion")) {
+if (!function_exists("Mysql_Connexion"))
    include ("mainfile.php");
-}
+   include("install/libraries/lib-inc.php");
 
 // Fonctions de l'interface    
 function mess_welcome($lang) {
+   // include("install/libraries/lib-inc.php")
    echo '
    <div id="welcome" class="jumbotron my-4 mx-2">'; 
    $id_fr = fopen("install/languages/welcome-$lang.txt", "r");
@@ -46,6 +47,8 @@ function mess_update($lang) {
    if ($lang=="french") echo "Terminer la mise &agrave; jour"; else echo "End the update";
    echo '" />
          </form>
+         <hr />
+         <span class="">version php : '.verif_php().'</span>
       </div>
    </div>';
 }
@@ -127,6 +130,60 @@ function maj_db() {
    $result = sql_query($sql);
    $aff.= '<small class="text-success"><strong>'.$t.'</strong> : création</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
+// fonctions : remplissage table (!! à voir le comportement de l'auto-increment !!)
+$sql="INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(1, 'edito', 1, '', 1, 1, '', '', 'Edito', 'edito', 'href=\"admin.php?op=Edito\"', 1, 'Contenu', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(2, 'adminStory', 2, '', 1, 1, '', '', 'Nouvel Article', 'postnew', 'href=\"admin.php?op=adminStory\"', 1, 'Contenu', 1);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(3, 'sections', 3, '', 1, 1, '', '', 'Rubriques', 'sections', 'href=\"admin.php?op=sections\"', 1, 'Contenu', 2);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(4, 'topicsmanager', 4, '', 1, 1, '', '', 'Gestion des Sujets', 'topicsman', 'href=\"admin.php?op=topicsmanager\"', 1, 'Contenu', 3);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(5, 'links', 5, '', 1, 1, '', '', 'Liens Web', 'links', 'href=\"admin.php?op=links\"', 1, 'Contenu', 5);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(6, 'FaqAdmin', 6, '', 1, 1, '1', '', 'FAQ', 'faq', 'href=\"admin.php?op=FaqAdmin\"', 1, 'Contenu', 6);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(7, 'Ephemerids', 7, '', 1, 1, '1', '', 'Ephémérides', 'ephem', 'href=\"admin.php?op=Ephemerids\"', 1, 'Contenu', 7);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(8, 'HeadlinesAdmin', 8, '', 1, 1, '', '', 'News externes', 'headlines', 'href=\"admin.php?op=HeadlinesAdmin\"', 1, 'Contenu', 8);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(9, 'DownloadAdmin', 9, '', 1, 1, '', '', 'Téléchargements', 'download', 'href=\"admin.php?op=DownloadAdmin\"', 1, 'Contenu', 9);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(10, 'mod_users', 10, '', 1, 1, '', '', 'Utilisateurs', 'users', 'href=\"admin.php?op=mod_users\"', 2, 'Utilisateurs', 1);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(11, 'groupes', 11, '', 1, 1, '', '', 'Groupes', 'groupes', 'href=\"admin.php?op=groupes\"', 2, 'Utilisateurs', 2);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(12, 'mod_authors', 12, '', 1, 1, '', '', 'Administrateurs', 'authors', 'href=\"admin.php?op=mod_authors\"', 2, 'Utilisateurs', 3);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(13, 'MaintForumAdmin', 13, '', 1, 1, '', '', 'Maintenance Forums', 'forum', 'href=\"admin.php?op=MaintForumAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(14, 'ForumConfigAdmin', 14, '', 1, 1, '', '', 'Configuration Forums', 'forum', 'href=\"admin.php?op=ForumConfigAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(15, 'ForumAdmin', 15, '', 1, 1, '', '', 'Edition Forums', 'forum', 'href=\"admin.php?op=ForumAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(16, 'lnl', 16, '', 1, 1, '', '', 'Lettre D''info', 'lnl', 'href=\"admin.php?op=lnl\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(17, 'email_user', 17, '', 1, 1, '', '', 'Message Interne', 'email_user', 'href=\"admin.php?op=email_user\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(18, 'BannersAdmin', 18, '', 1, 1, '', '', 'Bannières', 'banner', 'href=\"admin.php?op=BannersAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(19, 'create', 19, '', 1, 1, '', '', 'Sondages', 'newpoll', 'href=\"admin.php?op=create\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(20, 'reviews', 20, '', 1, 1, '', '', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(21, 'hreferer', 21, '', 1, 1, '', '', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 3, 'Communication', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(22, 'blocks', 22, '', 1, 1, '', '', 'Blocs', 'block', 'href=\"admin.php?op=blocks\"', 4, 'Interface', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(23, 'mblock', 23, '', 1, 1, '', '', 'Bloc Principal', 'blockmain', 'href=\"admin.php?op=mblock\"', 4, 'Interface', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(24, 'ablock', 24, '', 1, 1, '', '', 'Bloc Administration', 'blockadm', 'href=\"admin.php?op=ablock\"', 4, 'Interface', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(25, 'Configure', 25, '', 1, 1, '', '', 'Préférences', 'preferences', 'href=\"admin.php?op=Configure\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(26, 'ConfigFiles', 26, '', 1, 1, '', '', 'Fichiers configurations', 'preferences', 'href=\"admin.php?op=ConfigFiles\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(27, 'FileManager', 27, '', 1, 1, '', '', 'Gestionnaire Fichiers', 'filemanager', 'href=\"admin.php?op=FileManager\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(28, 'supercache', 28, '', 1, 1, '', '', 'SuperCache', 'overload', 'href=\"admin.php?op=supercache\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(29, 'OptimySQL', 29, '', 1, 1, '', '', 'OptimySQL', 'optimysql', 'href=\"admin.php?op=OptimySQL\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(30, 'SavemySQL', 30, '', 1, 1, '', '', 'SavemySQL', 'savemysql', 'href=\"admin.php?op=SavemySQL\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(31, 'MetaTagAdmin', 31, '', 1, 1, '', '', 'MétaTAGs', 'metatags', 'href=\"admin.php?op=MetaTagAdmin\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(32, 'MetaLangAdmin', 32, '', 1, 1, '', '', 'META-LANG', 'metalang', 'href=\"admin.php?op=Meta-LangAdmin\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(33, 'setban', 33, '', 1, 1, '', '', 'IP', 'ipban', 'href=\"admin.php?op=Extend-Admin-SubModule&amp;ModPath=ipban&amp;ModStart=setban\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(34, 'session_log', 34, '', 1, 1, '', '', 'Logs', 'logs', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=session-log&ModStart=session-log\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(35, 'reviews', 20, '', 1, 1, '0', 'Critique en atttente de validation.', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(36, 'mes_npds_versus', 36, '', 1, 1, '', 'Une nouvelle version est disponible ! Cliquez pour acc&#xE9;der &#xE0; la zone de t&#xE9;l&#xE9;chargement de NPDS.', '', 'message_npds', '', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(37, 'autoStory', 2, '', 1, 1, '1', 'articles sont programm&eacute;s pour la publication.', 'Auto-Articles', 'autonews', 'href=\"admin.php?op=autoStory\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(38, 'submissions', 2, '', 1, 1, '10', 'Article en attente de validation !', 'Articles', 'submissions', 'href=\"admin.php?op=submissions\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(39, 'hreferer_al', 21, '', 1, 1, '!!!', 'Limite des r&#xE9;f&#xE9;rants atteinte : pensez &#xE0; archiver vos r&#xE9;f&#xE9;rants.', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(40, 'abla', 40, '', 1, 1, '', '', 'Blackboard', 'abla', 'href=\"admin.php?op=abla\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(41, 'newlink', 5, '', 1, 1, '1', 'Lien &#xE0; valider', 'Lien', 'links', 'href=\"admin.php?op=links\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(42, 'brokenlink', 5, '', 1, 1, '6', 'Lien rompu &#xE0; valider', 'Lien rompu', 'links', 'href=\"admin.php?op=LinksListBrokenLinks\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(43, 'archive-stories', 43, '', 1, 1, '', '', 'Archives articles', 'archive-stories', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=archive-stories&ModStart=admin/archive-stories_set\"', 1, 'Contenu', 4);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(44, 'mod_users', 10, '', 1, 1, '', 'Utilisateur en attente de validation !', 'Utilisateurs', 'users', 'href=\"admin.php?op=nonallowed_users\"', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(49, 'npds_twi', 49, '', 1, 1, '', '', 'Npds_Twitter', 'npds_twi', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=npds_twi&ModStart=admin/npds_twi_set\"', 6, 'Modules', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(51, 'modules', 51, '', 1, 1, '', '', 'Gestion modules', 'modules', 'href=\"admin.php?op=modules\"', 5, 'Système', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(59, 'mes_npds_2', 0, '', 1, 1, '', 'Ceci est une note d''information provenant de NPDS.', '', 'flag_red', '', 9, 'Alerte', 0);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(74, 'reseaux-sociaux', 74, '', 1, 1, '', '', 'Réseaux sociaux', 'reseaux-sociaux', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=reseaux-sociaux&ModStart=admin/reseaux-sociaux_set\"', 2, 'Utilisateurs', 4);
+INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(75, 'geoloc', 75, '', 1, 1, '', '', 'geoloc', 'geoloc', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=geoloc&ModStart=admin/geoloc_set\"', 6, 'Modules', 0);";
+$result = sql_query($sql);
+
+
+
 
 // ip_loc : création 
    $t='ip_loc';
@@ -209,7 +266,7 @@ ORDER BY table_name,ordinal_position";
    echo '
    <div class="mx-2 mb-3">
       <h4>
-         <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#supcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : suppression <span class="badge badge-pill badge-danger float-right ml-2">XXX</span>
+         <a href="#" class="arrow-toggle text-primary mr-2" data-toggle="collapse" data-target="#supcolonnes"><i class="toggle-icon fa fa-caret-down"></i></a>COLONNES : suppressions <span class="badge badge-pill badge-danger float-right ml-2">XXX</span>
       </h4>
       <div id="supcolonnes" class="ml-4 collapse">'.$aff.'</div>
    </div>';
@@ -223,11 +280,12 @@ ORDER BY table_name,ordinal_position";
    $result = sql_query($sql);
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(80))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
+
 // adminblock : modif taille 
    $t='adminblock'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(1000))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(1000))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
 // appli_log : modif taille IPV6 support
@@ -392,35 +450,35 @@ ORDER BY table_name,ordinal_position";
    $t='queue'; $c='timestamp';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
    // rblocks : modif taille
    $t='rblocks'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
    // referer : modif taille
    $t='referer'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
    // related : modif taille
    $t='related'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // reviews : modif valeur par defaut de 'date' compat mysql 5.7
    $t='reviews'; $c='date';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATE NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // reviews : modif taille
    $c='email';
@@ -439,7 +497,7 @@ ORDER BY table_name,ordinal_position";
    $t='reviews_add'; $c='email';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // reviews_add : modif taille
    $c='url';
@@ -452,14 +510,14 @@ ORDER BY table_name,ordinal_position";
    $t='reviews_main'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." text DEFAULT ''";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (the null default value for text columns is empty string \'\')</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (the null default value for text columns is empty string \'\')</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // session : modif taille username support IPV6 (à voir si il faut rajouter NOT NULL)
    $t='session'; $c='username';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54") IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54") IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // session : modif taille host_addr support IPV6 (à voir si il faut rajouter NOT NULL)
    $c='host_addr';
@@ -468,12 +526,11 @@ ORDER BY table_name,ordinal_position";
    $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("54") IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
-
 // users : modif taille
    $t='users'; $c='email';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
    $result = sql_query($sql);
-   $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // users : modif taille
    $c='femail';
@@ -493,8 +550,6 @@ ORDER BY table_name,ordinal_position";
    $result = sql_query($sql);
    $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer type (varchar("255"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
-
-
 
    echo '
    <div class="mx-2 mb-3">
@@ -649,7 +704,9 @@ $result = sql_query($sql);
 */
 echo '
 <script type="text/javascript" src="lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>';
+<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="lib/js/npds_adapt.js"></script>
+';
 }
 
 
@@ -722,6 +779,7 @@ function maj_files() {
       $op="bad_version";
    }
 */
+//if(!isset($op)) $op='';//
 
    switch ($op) {
       case "update":
