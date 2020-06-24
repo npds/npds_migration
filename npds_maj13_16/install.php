@@ -306,7 +306,7 @@ ORDER BY table_name,ordinal_position";
    $nbr++;
 // authors : modif taille
    $c='email'; 
-   $sql="ALTER TABLE ".$NPDS_Prefix." MODIFY ".$c." varchar(254)";
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(254)";
    $result = sql_query($sql);
    $aff.= '<small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("254"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
@@ -385,7 +385,7 @@ ORDER BY table_name,ordinal_position";
 
 // links_editorials : modif valeur par defaut de editorialtimestamp compat mysql 5.7
    $t='links_editorials'; $c='editorialtimestamp';
-   $sql="ALTER TABLE ".$NPDS_Prefix." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." CHANGE ".$c." ".$c." DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00'";
    $result = sql_query($sql);
    $aff.=  '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
