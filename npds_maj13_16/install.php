@@ -131,59 +131,56 @@ function maj_db() {
    $aff.= '<small class="text-success"><strong>'.$t.'</strong> : création</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 // fonctions : remplissage table (!! à voir le comportement de l'auto-increment !!)
-$sql="INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(1, 'edito', 1, '', 1, 1, '', '', 'Edito', 'edito', 'href=\"admin.php?op=Edito\"', 1, 'Contenu', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(2, 'adminStory', 2, '', 1, 1, '', '', 'Nouvel Article', 'postnew', 'href=\"admin.php?op=adminStory\"', 1, 'Contenu', 1);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(3, 'sections', 3, '', 1, 1, '', '', 'Rubriques', 'sections', 'href=\"admin.php?op=sections\"', 1, 'Contenu', 2);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(4, 'topicsmanager', 4, '', 1, 1, '', '', 'Gestion des Sujets', 'topicsman', 'href=\"admin.php?op=topicsmanager\"', 1, 'Contenu', 3);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(5, 'links', 5, '', 1, 1, '', '', 'Liens Web', 'links', 'href=\"admin.php?op=links\"', 1, 'Contenu', 5);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(6, 'FaqAdmin', 6, '', 1, 1, '1', '', 'FAQ', 'faq', 'href=\"admin.php?op=FaqAdmin\"', 1, 'Contenu', 6);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(7, 'Ephemerids', 7, '', 1, 1, '1', '', 'Ephémérides', 'ephem', 'href=\"admin.php?op=Ephemerids\"', 1, 'Contenu', 7);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(8, 'HeadlinesAdmin', 8, '', 1, 1, '', '', 'News externes', 'headlines', 'href=\"admin.php?op=HeadlinesAdmin\"', 1, 'Contenu', 8);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(9, 'DownloadAdmin', 9, '', 1, 1, '', '', 'Téléchargements', 'download', 'href=\"admin.php?op=DownloadAdmin\"', 1, 'Contenu', 9);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(10, 'mod_users', 10, '', 1, 1, '', '', 'Utilisateurs', 'users', 'href=\"admin.php?op=mod_users\"', 2, 'Utilisateurs', 1);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(11, 'groupes', 11, '', 1, 1, '', '', 'Groupes', 'groupes', 'href=\"admin.php?op=groupes\"', 2, 'Utilisateurs', 2);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(12, 'mod_authors', 12, '', 1, 1, '', '', 'Administrateurs', 'authors', 'href=\"admin.php?op=mod_authors\"', 2, 'Utilisateurs', 3);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(13, 'MaintForumAdmin', 13, '', 1, 1, '', '', 'Maintenance Forums', 'forum', 'href=\"admin.php?op=MaintForumAdmin\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(14, 'ForumConfigAdmin', 14, '', 1, 1, '', '', 'Configuration Forums', 'forum', 'href=\"admin.php?op=ForumConfigAdmin\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(15, 'ForumAdmin', 15, '', 1, 1, '', '', 'Edition Forums', 'forum', 'href=\"admin.php?op=ForumAdmin\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(16, 'lnl', 16, '', 1, 1, '', '', 'Lettre D''info', 'lnl', 'href=\"admin.php?op=lnl\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(17, 'email_user', 17, '', 1, 1, '', '', 'Message Interne', 'email_user', 'href=\"admin.php?op=email_user\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(18, 'BannersAdmin', 18, '', 1, 1, '', '', 'Bannières', 'banner', 'href=\"admin.php?op=BannersAdmin\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(19, 'create', 19, '', 1, 1, '', '', 'Sondages', 'newpoll', 'href=\"admin.php?op=create\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(20, 'reviews', 20, '', 1, 1, '', '', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(21, 'hreferer', 21, '', 1, 1, '', '', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 3, 'Communication', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(22, 'blocks', 22, '', 1, 1, '', '', 'Blocs', 'block', 'href=\"admin.php?op=blocks\"', 4, 'Interface', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(23, 'mblock', 23, '', 1, 1, '', '', 'Bloc Principal', 'blockmain', 'href=\"admin.php?op=mblock\"', 4, 'Interface', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(24, 'ablock', 24, '', 1, 1, '', '', 'Bloc Administration', 'blockadm', 'href=\"admin.php?op=ablock\"', 4, 'Interface', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(25, 'Configure', 25, '', 1, 1, '', '', 'Préférences', 'preferences', 'href=\"admin.php?op=Configure\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(26, 'ConfigFiles', 26, '', 1, 1, '', '', 'Fichiers configurations', 'preferences', 'href=\"admin.php?op=ConfigFiles\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(27, 'FileManager', 27, '', 1, 1, '', '', 'Gestionnaire Fichiers', 'filemanager', 'href=\"admin.php?op=FileManager\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(28, 'supercache', 28, '', 1, 1, '', '', 'SuperCache', 'overload', 'href=\"admin.php?op=supercache\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(29, 'OptimySQL', 29, '', 1, 1, '', '', 'OptimySQL', 'optimysql', 'href=\"admin.php?op=OptimySQL\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(30, 'SavemySQL', 30, '', 1, 1, '', '', 'SavemySQL', 'savemysql', 'href=\"admin.php?op=SavemySQL\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(31, 'MetaTagAdmin', 31, '', 1, 1, '', '', 'MétaTAGs', 'metatags', 'href=\"admin.php?op=MetaTagAdmin\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(32, 'MetaLangAdmin', 32, '', 1, 1, '', '', 'META-LANG', 'metalang', 'href=\"admin.php?op=Meta-LangAdmin\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(33, 'setban', 33, '', 1, 1, '', '', 'IP', 'ipban', 'href=\"admin.php?op=Extend-Admin-SubModule&amp;ModPath=ipban&amp;ModStart=setban\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(34, 'session_log', 34, '', 1, 1, '', '', 'Logs', 'logs', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=session-log&ModStart=session-log\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(35, 'reviews', 20, '', 1, 1, '0', 'Critique en atttente de validation.', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(36, 'mes_npds_versus', 36, '', 1, 1, '', 'Une nouvelle version est disponible ! Cliquez pour acc&#xE9;der &#xE0; la zone de t&#xE9;l&#xE9;chargement de NPDS.', '', 'message_npds', '', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(37, 'autoStory', 2, '', 1, 1, '1', 'articles sont programm&eacute;s pour la publication.', 'Auto-Articles', 'autonews', 'href=\"admin.php?op=autoStory\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(38, 'submissions', 2, '', 1, 1, '10', 'Article en attente de validation !', 'Articles', 'submissions', 'href=\"admin.php?op=submissions\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(39, 'hreferer_al', 21, '', 1, 1, '!!!', 'Limite des r&#xE9;f&#xE9;rants atteinte : pensez &#xE0; archiver vos r&#xE9;f&#xE9;rants.', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(40, 'abla', 40, '', 1, 1, '', '', 'Blackboard', 'abla', 'href=\"admin.php?op=abla\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(41, 'newlink', 5, '', 1, 1, '1', 'Lien &#xE0; valider', 'Lien', 'links', 'href=\"admin.php?op=links\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(42, 'brokenlink', 5, '', 1, 1, '6', 'Lien rompu &#xE0; valider', 'Lien rompu', 'links', 'href=\"admin.php?op=LinksListBrokenLinks\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(43, 'archive-stories', 43, '', 1, 1, '', '', 'Archives articles', 'archive-stories', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=archive-stories&ModStart=admin/archive-stories_set\"', 1, 'Contenu', 4);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(44, 'mod_users', 10, '', 1, 1, '', 'Utilisateur en attente de validation !', 'Utilisateurs', 'users', 'href=\"admin.php?op=nonallowed_users\"', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(49, 'npds_twi', 49, '', 1, 1, '', '', 'Npds_Twitter', 'npds_twi', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=npds_twi&ModStart=admin/npds_twi_set\"', 6, 'Modules', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(51, 'modules', 51, '', 1, 1, '', '', 'Gestion modules', 'modules', 'href=\"admin.php?op=modules\"', 5, 'Système', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(59, 'mes_npds_2', 0, '', 1, 1, '', 'Ceci est une note d''information provenant de NPDS.', '', 'flag_red', '', 9, 'Alerte', 0);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(74, 'reseaux-sociaux', 74, '', 1, 1, '', '', 'Réseaux sociaux', 'reseaux-sociaux', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=reseaux-sociaux&ModStart=admin/reseaux-sociaux_set\"', 2, 'Utilisateurs', 4);
-INSERT INTO ".$t" (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(75, 'geoloc', 75, '', 1, 1, '', '', 'geoloc', 'geoloc', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=geoloc&ModStart=admin/geoloc_set\"', 6, 'Modules', 0);";
+$sql="INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(1, 'edito', 1, '', 1, 1, '', '', 'Edito', 'edito', 'href=\"admin.php?op=Edito\"', 1, 'Contenu', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(2, 'adminStory', 2, '', 1, 1, '', '', 'Nouvel Article', 'postnew', 'href=\"admin.php?op=adminStory\"', 1, 'Contenu', 1);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(3, 'sections', 3, '', 1, 1, '', '', 'Rubriques', 'sections', 'href=\"admin.php?op=sections\"', 1, 'Contenu', 2);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(4, 'topicsmanager', 4, '', 1, 1, '', '', 'Gestion des Sujets', 'topicsman', 'href=\"admin.php?op=topicsmanager\"', 1, 'Contenu', 3);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(5, 'links', 5, '', 1, 1, '', '', 'Liens Web', 'links', 'href=\"admin.php?op=links\"', 1, 'Contenu', 5);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(6, 'FaqAdmin', 6, '', 1, 1, '1', '', 'FAQ', 'faq', 'href=\"admin.php?op=FaqAdmin\"', 1, 'Contenu', 6);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(7, 'Ephemerids', 7, '', 1, 1, '1', '', 'Ephémérides', 'ephem', 'href=\"admin.php?op=Ephemerids\"', 1, 'Contenu', 7);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(8, 'HeadlinesAdmin', 8, '', 1, 1, '', '', 'News externes', 'headlines', 'href=\"admin.php?op=HeadlinesAdmin\"', 1, 'Contenu', 8);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(9, 'DownloadAdmin', 9, '', 1, 1, '', '', 'Téléchargements', 'download', 'href=\"admin.php?op=DownloadAdmin\"', 1, 'Contenu', 9);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(10, 'mod_users', 10, '', 1, 1, '', '', 'Utilisateurs', 'users', 'href=\"admin.php?op=mod_users\"', 2, 'Utilisateurs', 1);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(11, 'groupes', 11, '', 1, 1, '', '', 'Groupes', 'groupes', 'href=\"admin.php?op=groupes\"', 2, 'Utilisateurs', 2);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(12, 'mod_authors', 12, '', 1, 1, '', '', 'Administrateurs', 'authors', 'href=\"admin.php?op=mod_authors\"', 2, 'Utilisateurs', 3);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(13, 'MaintForumAdmin', 13, '', 1, 1, '', '', 'Maintenance Forums', 'forum', 'href=\"admin.php?op=MaintForumAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(14, 'ForumConfigAdmin', 14, '', 1, 1, '', '', 'Configuration Forums', 'forum', 'href=\"admin.php?op=ForumConfigAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(15, 'ForumAdmin', 15, '', 1, 1, '', '', 'Edition Forums', 'forum', 'href=\"admin.php?op=ForumAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(16, 'lnl', 16, '', 1, 1, '', '', 'Lettre D''info', 'lnl', 'href=\"admin.php?op=lnl\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(17, 'email_user', 17, '', 1, 1, '', '', 'Message Interne', 'email_user', 'href=\"admin.php?op=email_user\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(18, 'BannersAdmin', 18, '', 1, 1, '', '', 'Bannières', 'banner', 'href=\"admin.php?op=BannersAdmin\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(19, 'create', 19, '', 1, 1, '', '', 'Sondages', 'newpoll', 'href=\"admin.php?op=create\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(20, 'reviews', 20, '', 1, 1, '', '', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(21, 'hreferer', 21, '', 1, 1, '', '', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 3, 'Communication', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(22, 'blocks', 22, '', 1, 1, '', '', 'Blocs', 'block', 'href=\"admin.php?op=blocks\"', 4, 'Interface', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(23, 'mblock', 23, '', 1, 1, '', '', 'Bloc Principal', 'blockmain', 'href=\"admin.php?op=mblock\"', 4, 'Interface', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(24, 'ablock', 24, '', 1, 1, '', '', 'Bloc Administration', 'blockadm', 'href=\"admin.php?op=ablock\"', 4, 'Interface', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(25, 'Configure', 25, '', 1, 1, '', '', 'Préférences', 'preferences', 'href=\"admin.php?op=Configure\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(26, 'ConfigFiles', 26, '', 1, 1, '', '', 'Fichiers configurations', 'preferences', 'href=\"admin.php?op=ConfigFiles\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(27, 'FileManager', 27, '', 1, 1, '', '', 'Gestionnaire Fichiers', 'filemanager', 'href=\"admin.php?op=FileManager\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(28, 'supercache', 28, '', 1, 1, '', '', 'SuperCache', 'overload', 'href=\"admin.php?op=supercache\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(29, 'OptimySQL', 29, '', 1, 1, '', '', 'OptimySQL', 'optimysql', 'href=\"admin.php?op=OptimySQL\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(30, 'SavemySQL', 30, '', 1, 1, '', '', 'SavemySQL', 'savemysql', 'href=\"admin.php?op=SavemySQL\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(31, 'MetaTagAdmin', 31, '', 1, 1, '', '', 'MétaTAGs', 'metatags', 'href=\"admin.php?op=MetaTagAdmin\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(32, 'MetaLangAdmin', 32, '', 1, 1, '', '', 'META-LANG', 'metalang', 'href=\"admin.php?op=Meta-LangAdmin\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(33, 'setban', 33, '', 1, 1, '', '', 'IP', 'ipban', 'href=\"admin.php?op=Extend-Admin-SubModule&amp;ModPath=ipban&amp;ModStart=setban\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(34, 'session_log', 34, '', 1, 1, '', '', 'Logs', 'logs', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=session-log&ModStart=session-log\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(35, 'reviews', 20, '', 1, 1, '0', 'Critique en atttente de validation.', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(36, 'mes_npds_versus', 36, '', 1, 1, '', 'Une nouvelle version est disponible ! Cliquez pour acc&#xE9;der &#xE0; la zone de t&#xE9;l&#xE9;chargement de NPDS.', '', 'message_npds', '', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(37, 'autoStory', 2, '', 1, 1, '1', 'articles sont programm&eacute;s pour la publication.', 'Auto-Articles', 'autonews', 'href=\"admin.php?op=autoStory\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(38, 'submissions', 2, '', 1, 1, '10', 'Article en attente de validation !', 'Articles', 'submissions', 'href=\"admin.php?op=submissions\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(39, 'hreferer_al', 21, '', 1, 1, '!!!', 'Limite des r&#xE9;f&#xE9;rants atteinte : pensez &#xE0; archiver vos r&#xE9;f&#xE9;rants.', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(40, 'abla', 40, '', 1, 1, '', '', 'Blackboard', 'abla', 'href=\"admin.php?op=abla\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(41, 'newlink', 5, '', 1, 1, '1', 'Lien &#xE0; valider', 'Lien', 'links', 'href=\"admin.php?op=links\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(42, 'brokenlink', 5, '', 1, 1, '6', 'Lien rompu &#xE0; valider', 'Lien rompu', 'links', 'href=\"admin.php?op=LinksListBrokenLinks\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(43, 'archive-stories', 43, '', 1, 1, '', '', 'Archives articles', 'archive-stories', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=archive-stories&ModStart=admin/archive-stories_set\"', 1, 'Contenu', 4);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(44, 'mod_users', 10, '', 1, 1, '', 'Utilisateur en attente de validation !', 'Utilisateurs', 'users', 'href=\"admin.php?op=nonallowed_users\"', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(49, 'npds_twi', 49, '', 1, 1, '', '', 'Npds_Twitter', 'npds_twi', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=npds_twi&ModStart=admin/npds_twi_set\"', 6, 'Modules', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(51, 'modules', 51, '', 1, 1, '', '', 'Gestion modules', 'modules', 'href=\"admin.php?op=modules\"', 5, 'Système', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(59, 'mes_npds_2', 0, '', 1, 1, '', 'Ceci est une note d''information provenant de NPDS.', '', 'flag_red', '', 9, 'Alerte', 0);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(74, 'reseaux-sociaux', 74, '', 1, 1, '', '', 'Réseaux sociaux', 'reseaux-sociaux', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=reseaux-sociaux&ModStart=admin/reseaux-sociaux_set\"', 2, 'Utilisateurs', 4);
+INSERT INTO ".$t." (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(75, 'geoloc', 75, '', 1, 1, '', '', 'geoloc', 'geoloc', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=geoloc&ModStart=admin/geoloc_set\"', 6, 'Modules', 0);";
 $result = sql_query($sql);
-
-
-
 
 // ip_loc : création 
    $t='ip_loc';
@@ -439,11 +436,18 @@ ORDER BY table_name,ordinal_position";
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>lnl_send : date</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
-   // mainblock : modif taille
+// mainblock : modif taille
    $t='mainblock'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
+   $nbr++;
+   
+// posts : modif taille IPV6 support
+   $t='posts'; $c='poster_ip';
+   $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(54)";
+   $result = sql_query($sql);
+   $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar(54) IPV6 support)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
 // queue : modif valeur par defaut de 'timestamp' compat mysql 5.7
@@ -453,21 +457,21 @@ ORDER BY table_name,ordinal_position";
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer valeur par défaut (compat mysql 5.7)</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
-   // rblocks : modif taille
+// rblocks : modif taille
    $t='rblocks'; $c='title';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(1000)";
    $result = sql_query($sql);
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("1000"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
 
-   // referer : modif taille
+// referer : modif taille
    $t='referer'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
    $aff.= '<br />'.$t.'<br /><small class="text-success"><strong>'.$t.' : '.$c.'</strong> : modifer taille (varchar("320"))</small><i class="fa fa-check text-success ml-2"></i><br />';
    $nbr++;
    
-   // related : modif taille
+// related : modif taille
    $t='related'; $c='url';
    $sql="ALTER TABLE ".$NPDS_Prefix.$t." MODIFY ".$c." varchar(320)";
    $result = sql_query($sql);
@@ -561,127 +565,12 @@ ORDER BY table_name,ordinal_position";
 
 /*
 
-
-
+/// on progress and TO DO
    // counter à faire
-
 
    // links_categories : modif longueur title
    $sql="ALTER TABLE ".$NPDS_Prefix."links_categories MODIFY title varchar(255)";
    $result = sql_query($sql);
-
-
-   // links_links : modif longueur url
-   $sql="ALTER TABLE ".$NPDS_Prefix."links_links MODIFY url varchar(255)";
-   $result = sql_query($sql);
-
-
-
-   // posts : modif longueur poster_ip pour support IPV6
-   $sql="ALTER TABLE ".$NPDS_Prefix."posts MODIFY poster_ip varchar(54)";
-   $result = sql_query($sql);
-
-
-
-
-   // session : modif longueur username, host_addr pour support IPV6 (à voir si il faut rajouter NOT NULL)
-   $sql="ALTER TABLE ".$NPDS_Prefix."session MODIFY username varchar(54)";
-   $result = sql_query($sql);
-   $sql="ALTER TABLE ".$NPDS_Prefix."session MODIFY host_addr varchar(54)";
-   $result = sql_query($sql);
-
-
-   // création : 3 tables droits, fonctions, ip_loc
-   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."droits (
-  d_aut_aid varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id administrateur',
-  d_fon_fid tinyint(3) unsigned NOT NULL COMMENT 'id fonction',
-  d_droits varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
-   $result = sql_query($sql);
-
-   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."fonctions (
-  fid mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id unique auto incrémenté',
-  fnom varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  fdroits1 tinyint(3) unsigned NOT NULL,
-  fdroits1_descr varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  finterface tinyint(1) unsigned NOT NULL COMMENT '1 ou 0 : la fonction dispose ou non d''une interface',
-  fetat tinyint(1) NOT NULL COMMENT '0 ou 1  9 : non active ou installé, installé',
-  fretour varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'utiliser par les fonctions de categorie Alerte : nombre, ou ',
-  fretour_h varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
-  fnom_affich varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  ficone varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  furlscript varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'attribut et contenu  de balise A : href=\"xxx\", onclick=\"xxx\"  etc',
-  fcategorie tinyint(3) unsigned NOT NULL,
-  fcategorie_nom varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  fordre tinyint(2) unsigned NOT NULL,
-  PRIMARY KEY (fid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci COMMENT='Dune_proto'";
-   $result = sql_query($sql);
-
-   $sql="CREATE TABLE IF NOT EXISTS ".$NPDS_Prefix."ip_loc (
-  ip_id smallint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  ip_long float NOT NULL DEFAULT '0',
-  ip_lat float NOT NULL DEFAULT '0',
-  ip_visi_pag varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  ip_visite mediumint(9) UNSIGNED NOT NULL DEFAULT '0',
-  ip_ip varchar(54) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  ip_country varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  ip_code_country varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  ip_city varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (ip_id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-   $result = sql_query($sql);
-
-// fonctions : remplissage table (!! à voir le comportement de l'auto-increment !!)
-$sql="INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(1, 'edito', 1, '', 1, 1, '', '', 'Edito', 'edito', 'href=\"admin.php?op=Edito\"', 1, 'Contenu', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(2, 'adminStory', 2, '', 1, 1, '', '', 'Nouvel Article', 'postnew', 'href=\"admin.php?op=adminStory\"', 1, 'Contenu', 1);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(3, 'sections', 3, '', 1, 1, '', '', 'Rubriques', 'sections', 'href=\"admin.php?op=sections\"', 1, 'Contenu', 2);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(4, 'topicsmanager', 4, '', 1, 1, '', '', 'Gestion des Sujets', 'topicsman', 'href=\"admin.php?op=topicsmanager\"', 1, 'Contenu', 3);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(5, 'links', 5, '', 1, 1, '', '', 'Liens Web', 'links', 'href=\"admin.php?op=links\"', 1, 'Contenu', 5);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(6, 'FaqAdmin', 6, '', 1, 1, '1', '', 'FAQ', 'faq', 'href=\"admin.php?op=FaqAdmin\"', 1, 'Contenu', 6);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(7, 'Ephemerids', 7, '', 1, 1, '1', '', 'Ephémérides', 'ephem', 'href=\"admin.php?op=Ephemerids\"', 1, 'Contenu', 7);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(8, 'HeadlinesAdmin', 8, '', 1, 1, '', '', 'News externes', 'headlines', 'href=\"admin.php?op=HeadlinesAdmin\"', 1, 'Contenu', 8);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(9, 'DownloadAdmin', 9, '', 1, 1, '', '', 'Téléchargements', 'download', 'href=\"admin.php?op=DownloadAdmin\"', 1, 'Contenu', 9);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(10, 'mod_users', 10, '', 1, 1, '', '', 'Utilisateurs', 'users', 'href=\"admin.php?op=mod_users\"', 2, 'Utilisateurs', 1);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(11, 'groupes', 11, '', 1, 1, '', '', 'Groupes', 'groupes', 'href=\"admin.php?op=groupes\"', 2, 'Utilisateurs', 2);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(12, 'mod_authors', 12, '', 1, 1, '', '', 'Administrateurs', 'authors', 'href=\"admin.php?op=mod_authors\"', 2, 'Utilisateurs', 3);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(13, 'MaintForumAdmin', 13, '', 1, 1, '', '', 'Maintenance Forums', 'forum', 'href=\"admin.php?op=MaintForumAdmin\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(14, 'ForumConfigAdmin', 14, '', 1, 1, '', '', 'Configuration Forums', 'forum', 'href=\"admin.php?op=ForumConfigAdmin\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(15, 'ForumAdmin', 15, '', 1, 1, '', '', 'Edition Forums', 'forum', 'href=\"admin.php?op=ForumAdmin\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(16, 'lnl', 16, '', 1, 1, '', '', 'Lettre D''info', 'lnl', 'href=\"admin.php?op=lnl\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(17, 'email_user', 17, '', 1, 1, '', '', 'Message Interne', 'email_user', 'href=\"admin.php?op=email_user\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(18, 'BannersAdmin', 18, '', 1, 1, '', '', 'Bannières', 'banner', 'href=\"admin.php?op=BannersAdmin\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(19, 'create', 19, '', 1, 1, '', '', 'Sondages', 'newpoll', 'href=\"admin.php?op=create\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(20, 'reviews', 20, '', 1, 1, '', '', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(21, 'hreferer', 21, '', 1, 1, '', '', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 3, 'Communication', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(22, 'blocks', 22, '', 1, 1, '', '', 'Blocs', 'block', 'href=\"admin.php?op=blocks\"', 4, 'Interface', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(23, 'mblock', 23, '', 1, 1, '', '', 'Bloc Principal', 'blockmain', 'href=\"admin.php?op=mblock\"', 4, 'Interface', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(24, 'ablock', 24, '', 1, 1, '', '', 'Bloc Administration', 'blockadm', 'href=\"admin.php?op=ablock\"', 4, 'Interface', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(25, 'Configure', 25, '', 1, 1, '', '', 'Préférences', 'preferences', 'href=\"admin.php?op=Configure\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(26, 'ConfigFiles', 26, '', 1, 1, '', '', 'Fichiers configurations', 'preferences', 'href=\"admin.php?op=ConfigFiles\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(27, 'FileManager', 27, '', 1, 1, '', '', 'Gestionnaire Fichiers', 'filemanager', 'href=\"admin.php?op=FileManager\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(28, 'supercache', 28, '', 1, 1, '', '', 'SuperCache', 'overload', 'href=\"admin.php?op=supercache\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(29, 'OptimySQL', 29, '', 1, 1, '', '', 'OptimySQL', 'optimysql', 'href=\"admin.php?op=OptimySQL\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(30, 'SavemySQL', 30, '', 1, 1, '', '', 'SavemySQL', 'savemysql', 'href=\"admin.php?op=SavemySQL\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(31, 'MetaTagAdmin', 31, '', 1, 1, '', '', 'MétaTAGs', 'metatags', 'href=\"admin.php?op=MetaTagAdmin\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(32, 'MetaLangAdmin', 32, '', 1, 1, '', '', 'META-LANG', 'metalang', 'href=\"admin.php?op=Meta-LangAdmin\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(33, 'setban', 33, '', 1, 1, '', '', 'IP', 'ipban', 'href=\"admin.php?op=Extend-Admin-SubModule&amp;ModPath=ipban&amp;ModStart=setban\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(34, 'session_log', 34, '', 1, 1, '', '', 'Logs', 'logs', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=session-log&ModStart=session-log\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(35, 'reviews', 20, '', 1, 1, '0', 'Critique en atttente de validation.', 'Critiques', 'reviews', 'href=\"admin.php?op=reviews\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(36, 'mes_npds_versus', 36, '', 1, 1, '', 'Une nouvelle version est disponible ! Cliquez pour acc&#xE9;der &#xE0; la zone de t&#xE9;l&#xE9;chargement de NPDS.', '', 'message_npds', '', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(37, 'autoStory', 2, '', 1, 1, '1', 'articles sont programm&eacute;s pour la publication.', 'Auto-Articles', 'autonews', 'href=\"admin.php?op=autoStory\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(38, 'submissions', 2, '', 1, 1, '10', 'Article en attente de validation !', 'Articles', 'submissions', 'href=\"admin.php?op=submissions\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(39, 'hreferer_al', 21, '', 1, 1, '!!!', 'Limite des r&#xE9;f&#xE9;rants atteinte : pensez &#xE0; archiver vos r&#xE9;f&#xE9;rants.', 'Sites Référents', 'referer', 'href=\"admin.php?op=hreferer\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(40, 'abla', 40, '', 1, 1, '', '', 'Blackboard', 'abla', 'href=\"admin.php?op=abla\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(41, 'newlink', 5, '', 1, 1, '1', 'Lien &#xE0; valider', 'Lien', 'links', 'href=\"admin.php?op=links\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(42, 'brokenlink', 5, '', 1, 1, '6', 'Lien rompu &#xE0; valider', 'Lien rompu', 'links', 'href=\"admin.php?op=LinksListBrokenLinks\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(43, 'archive-stories', 43, '', 1, 1, '', '', 'Archives articles', 'archive-stories', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=archive-stories&ModStart=admin/archive-stories_set\"', 1, 'Contenu', 4);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(44, 'mod_users', 10, '', 1, 1, '', 'Utilisateur en attente de validation !', 'Utilisateurs', 'users', 'href=\"admin.php?op=nonallowed_users\"', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(49, 'npds_twi', 49, '', 1, 1, '', '', 'Npds_Twitter', 'npds_twi', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=npds_twi&ModStart=admin/npds_twi_set\"', 6, 'Modules', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(51, 'modules', 51, '', 1, 1, '', '', 'Gestion modules', 'modules', 'href=\"admin.php?op=modules\"', 5, 'Système', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(59, 'mes_npds_2', 0, '', 1, 1, '', 'Ceci est une note d''information provenant de NPDS.', '', 'flag_red', '', 9, 'Alerte', 0);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(74, 'reseaux-sociaux', 74, '', 1, 1, '', '', 'Réseaux sociaux', 'reseaux-sociaux', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=reseaux-sociaux&ModStart=admin/reseaux-sociaux_set\"', 2, 'Utilisateurs', 4);
-INSERT INTO fonctions (fid, fnom, fdroits1, fdroits1_descr, finterface, fetat, fretour, fretour_h, fnom_affich, ficone, furlscript, fcategorie, fcategorie_nom, fordre) VALUES(75, 'geoloc', 75, '', 1, 1, '', '', 'geoloc', 'geoloc', 'href=\"admin.php?op=Extend-Admin-SubModule&ModPath=geoloc&ModStart=admin/geoloc_set\"', 6, 'Modules', 0);";
-$result = sql_query($sql);
 
 
 //==> to do (on chechr et effeace les metamots du core on touche pas au autres)
@@ -702,14 +591,13 @@ $result = sql_query($sql);
       }
    }
 */
+
 echo '
 <script type="text/javascript" src="lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="lib/js/npds_adapt.js"></script>
 ';
 }
-
-
 
 function maj_files() {   
    global $nuke_url;
