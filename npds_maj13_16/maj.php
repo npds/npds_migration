@@ -14,7 +14,6 @@
 if (!function_exists("Mysql_Connexion"))
    include ("mainfile.php");
    include("install/libraries/lib-inc.php");
-   include("lib/archive.php");
 
 // Fonctions de l'interface    
 function mess_welcome($lang) {
@@ -269,7 +268,7 @@ ORDER BY table_name,ordinal_position";
       $nomtable= $row[2];
       $nomcol = $row[3];
 //      $coltype= $row[7];
-      $coltype=$row[15];//
+      $coltype=$row[15]//
 /*
 
 $sql="ALTER TABLE '".$nomtable."' MODIFY '".$nomcol."' '".$coltype."' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
