@@ -1,3 +1,5 @@
+> ### Archivé pour manque de temps et l'utilité pour les utilisateur diminuant avec le temps ... La version 16.8 embarque désormais un système de déploiement du portail et de mise à jour de la base de données... qui évitera des travaux similaires dans le futur entre les versions et permettra des mises à jour même mineures en continu...
+
 # npds_migration
 
 stade : proto
